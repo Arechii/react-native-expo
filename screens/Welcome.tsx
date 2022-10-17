@@ -3,9 +3,9 @@ import { Container } from "../components/shared";
 import { colors } from "../components/colors";
 import styled from "styled-components/native";
 import background from "../assets/bgs/background_v1.png";
-import BigText from "../components/Texts/BigText";
-import SmallText from "../components/Texts/SmallText";
-import RegularButton from "../components/Buttons/RegularButton";
+import BigText from "../components/Text/BigText";
+import SmallText from "../components/Text/SmallText";
+import RegularButton from "../components/Button/RegularButton";
 
 const WelcomeContainer = styled(Container)`
   background-color: ${colors.secondary};

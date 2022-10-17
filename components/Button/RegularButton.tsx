@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { GestureResponderEvent, StyleProp, TextStyle, ViewStyle } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../colors";
-import RegularText from "../Texts/RegularText";
+import RegularText from "../Text/RegularText";
 
 const ButtonView = styled.TouchableOpacity`
   align-items: center;

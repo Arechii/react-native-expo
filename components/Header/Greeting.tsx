@@ -1,8 +1,8 @@
 import { StyleProp, TextStyle } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../colors";
-import RegularText from "../Texts/RegularText";
-import SmallText from "../Texts/SmallText";
+import RegularText from "../Text/RegularText";
+import SmallText from "../Text/SmallText";
 
 const StyledView = styled.View`
   flex: 1;
