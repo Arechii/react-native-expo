@@ -1,7 +1,10 @@
 import Welcome from "./screens/Welcome";
-import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import RootStack from "./navigators/RootStack";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 const App = () => {
   let [fontsLoaded] = useFonts({
@@ -9,9 +12,12 @@ const App = () => {
     "Lato-Regular": require("./assets/fonts/Lato-Regular.ttf")
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  useEffect(() => {
+    if (!fontsLoaded) return;
+    SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
 
   return <RootStack />;
 };
