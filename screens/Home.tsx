@@ -13,6 +13,8 @@ import { SendMoneyProps } from "../components/SendMoney/types";
 import portrait1 from "../assets/portraits/1.jpg";
 import portrait2 from "../assets/portraits/2.jpg";
 import portrait3 from "../assets/portraits/3.jpg";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../navigators/RootStack";
 
 const HomeContainer = styled(Container)`
   background-color: ${colors.graylight};
@@ -103,6 +105,8 @@ const sendMoneyData: SendMoneyProps[] = [
     img: portrait3
   }
 ];
+
+export type Props = StackScreenProps<RootStackParamList, "Welcome">;
 
 const Home = () => {
   return (

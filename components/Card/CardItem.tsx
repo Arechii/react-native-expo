@@ -7,6 +7,8 @@ import { useCallback } from "react";
 import RegularText from "../Text/RegularText";
 import { View } from "react-native";
 import SmallText from "../Text/SmallText";
+import { useNavigation } from "@react-navigation/native";
+import { Props as HomeProps } from "../../screens/Home";
 
 const CardBackground = styled.ImageBackground`
   height: 75%;
@@ -45,7 +47,10 @@ const Logo = styled.Image`
 `;
 
 const CardItem = ({ accountNr, logo, balance }: CardProps) => {
-  const handlePress = useCallback(() => {}, []);
+  const navigation = useNavigation<HomeProps["navigation"]>();
+  const handlePress = useCallback(() => {
+    navigation.navigate("Balance", { accountNr, logo, balance });
+  }, []);
 
   return (
     <CardBackground source={card_bg}>

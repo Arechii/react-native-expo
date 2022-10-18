@@ -40,7 +40,7 @@ const options: StackNavigationOptions = {
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={options} initialRouteName="Balance">
+      <Stack.Navigator screenOptions={options} initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
         <Stack.Screen
           name="Home"
