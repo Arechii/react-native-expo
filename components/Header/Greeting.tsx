@@ -1,6 +1,7 @@
 import { StyleProp, TextStyle } from "react-native";
-import styled from "styled-components/native";
 import { colors } from "../colors";
+import { useMemo } from "react";
+import styled from "styled-components/native";
 import RegularText from "../Text/RegularText";
 import SmallText from "../Text/SmallText";
 
@@ -18,10 +19,20 @@ interface GreetingProps {
 }
 
 const Greeting = ({ mainText, subText, mainTextStyles, subTextStyles }: GreetingProps) => {
+  const mainTextStyle = useMemo<StyleProp<TextStyle>>(
+    () => [{ color: colors.secondary, fontSize: 22 }, mainTextStyles],
+    [mainTextStyles]
+  );
+
+  const subTextStyle = useMemo<StyleProp<TextStyle>>(
+    () => [{ color: colors.graydark }, subTextStyles],
+    [subTextStyles]
+  );
+
   return (
     <StyledView>
-      <RegularText textStyles={[{ color: colors.secondary, fontSize: 22 }, mainTextStyles]}>{mainText}</RegularText>
-      <SmallText textStyles={[{ color: colors.graydark }, subTextStyles]}>{subText}</SmallText>
+      <RegularText textStyles={mainTextStyle}>{mainText}</RegularText>
+      <SmallText textStyles={subTextStyle}>{subText}</SmallText>
     </StyledView>
   );
 };

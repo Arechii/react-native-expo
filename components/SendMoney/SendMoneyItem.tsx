@@ -1,10 +1,12 @@
-import styled from "styled-components/native";
 import { colors } from "../colors";
-import Profile from "../Header/Profile";
 import { ScreenWidth } from "../shared";
+import { SendMoneyProps } from "./types";
+import { useCallback, useMemo } from "react";
+import { TextStyle, ViewStyle } from "react-native";
+import styled from "styled-components/native";
+import Profile from "../Header/Profile";
 import RegularText from "../Text/RegularText";
 import SmallText from "../Text/SmallText";
-import { SendMoneyProps } from "./types";
 
 const SendMoneyItemContainer = styled.TouchableHighlight`
   height: 130px;
@@ -15,17 +17,30 @@ const SendMoneyItemContainer = styled.TouchableHighlight`
   margin: 0px 10px 10px 0px;
 `;
 
-const SendMoneyItem = ({ id, name, amount, background, img }: SendMoneyProps) => {
+const nameStyle: TextStyle = {
+  textAlign: "left",
+  color: colors.white,
+  fontSize: 12
+};
+
+const amountStyle: TextStyle = { ...nameStyle, fontSize: 13 };
+const imgContainerStyle: ViewStyle = { marginBottom: 10 };
+
+const SendMoneyItem = ({ name, amount, background, img }: SendMoneyProps) => {
+  const containerStyle = useMemo<ViewStyle>(
+    () => ({
+      backgroundColor: background
+    }),
+    [background]
+  );
+  const onPress = useCallback(() => alert("Sent Money!"), []);
+
   return (
-    <SendMoneyItemContainer
-      underlayColor={colors.secondary}
-      style={{ backgroundColor: background }}
-      onPress={() => alert("Send Money!")}
-    >
+    <SendMoneyItemContainer underlayColor={colors.secondary} style={containerStyle} onPress={onPress}>
       <>
-        <Profile img={img} imgContainerStyle={{ marginBottom: 10 }} />
-        <SmallText textStyles={{ textAlign: "left", color: colors.white, fontSize: 12 }}>{name}</SmallText>
-        <RegularText textStyles={{ textAlign: "left", color: colors.white, fontSize: 13 }}>{amount}</RegularText>
+        <Profile img={img} imgContainerStyle={imgContainerStyle} />
+        <SmallText textStyles={nameStyle}>{name}</SmallText>
+        <RegularText textStyles={amountStyle}>{amount}</RegularText>
       </>
     </SendMoneyItemContainer>
   );

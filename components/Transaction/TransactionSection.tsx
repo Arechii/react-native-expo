@@ -1,10 +1,10 @@
-import { FlatList, FlatListProps } from "react-native";
-import styled from "styled-components/native";
+import { FlatList, FlatListProps, TextStyle, ViewStyle } from "react-native";
 import { colors } from "../colors";
-import RegularText from "../Text/RegularText";
-import SmallText from "../Text/SmallText";
 import { TransactionProps, TransactionSectionProps } from "./types";
 import { Ionicons } from "@expo/vector-icons";
+import styled from "styled-components/native";
+import RegularText from "../Text/RegularText";
+import SmallText from "../Text/SmallText";
 import TransactionItem from "./TransactionItem";
 
 const TransactionSectionBackground = styled.View`
@@ -25,20 +25,25 @@ const TransactionList = styled(FlatList as new (props: FlatListProps<Transaction
   width: 100%;
 `;
 
+const rowStyle: ViewStyle = { marginBottom: 25 };
+const titleTextStyle: TextStyle = { fontSize: 19, color: colors.secondary };
+const valueTextStyle: TextStyle = { color: colors.secondary };
+const listContainerStyle: ViewStyle = { paddingBottom: 25 };
+
 const TransactionSection = ({ data }: TransactionSectionProps) => {
   return (
     <TransactionSectionBackground>
-      <TransactionRow style={{ marginBottom: 25 }}>
-        <RegularText textStyles={{ fontSize: 19, color: colors.secondary }}>Transaction</RegularText>
-        <SmallText textStyles={{ color: colors.secondary }}>
+      <TransactionRow style={rowStyle}>
+        <RegularText textStyles={titleTextStyle}>Transactions</RegularText>
+        <SmallText textStyles={valueTextStyle}>
           Recent <Ionicons name="caret-down" size={13} color={colors.graydark} />
         </SmallText>
       </TransactionRow>
       <TransactionList
         data={data}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 25 }}
-        keyExtractor={({ id }: any) => id.toString()}
+        contentContainerStyle={listContainerStyle}
+        keyExtractor={({ id }: TransactionProps) => id.toString()}
         renderItem={({ item }: any) => <TransactionItem {...item} />}
       />
     </TransactionSectionBackground>

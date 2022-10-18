@@ -1,10 +1,10 @@
 import styled from "styled-components/native";
-import { colors } from "../colors";
-import { BalanceCardProps } from "./types";
+import SmallText from "../Text/SmallText";
 import card_bg from "../../assets/bgs/background_transparent.png";
 import RegularText from "../Text/RegularText";
-import { View } from "react-native";
-import SmallText from "../Text/SmallText";
+import { colors } from "../colors";
+import { BalanceCardProps } from "./types";
+import { TextStyle, View, ViewStyle } from "react-native";
 
 const CardBackground = styled.ImageBackground`
   height: 75%;
@@ -36,6 +36,19 @@ const Logo = styled.Image`
   flex: 1;
 `;
 
+const viewStyle: ViewStyle = {
+  flex: 3
+};
+
+const balanceTitleStyle: TextStyle = {
+  marginBottom: 5,
+  color: colors.graylight
+};
+
+const balanceStyle: TextStyle = {
+  fontSize: 19
+};
+
 const BalanceCard = ({ accountNr, logo, balance }: BalanceCardProps) => {
   return (
     <CardBackground source={card_bg}>
@@ -44,9 +57,9 @@ const BalanceCard = ({ accountNr, logo, balance }: BalanceCardProps) => {
           <RegularText>******{accountNr?.slice(6, 10)}</RegularText>
         </CardRow>
         <CardRow>
-          <View style={{ flex: 3 }}>
-            <SmallText textStyles={{ marginBottom: 5, color: colors.graylight }}>Total balance</SmallText>
-            <RegularText textStyles={{ fontSize: 19 }}>${balance}</RegularText>
+          <View style={viewStyle}>
+            <SmallText textStyles={balanceTitleStyle}>Total balance</SmallText>
+            <RegularText textStyles={balanceStyle}>${balance}</RegularText>
           </View>
           <Logo source={logo} />
         </CardRow>

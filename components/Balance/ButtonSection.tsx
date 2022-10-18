@@ -1,7 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../colors";
+import { ViewStyle } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useCallback } from "react";
 import styled from "styled-components/native";
 import RegularButton from "../Button/RegularButton";
-import { colors } from "../colors";
 
 const ButtonSectionBackground = styled.View`
   width: 100%;
@@ -9,11 +12,21 @@ const ButtonSectionBackground = styled.View`
   flex: 1;
 `;
 
+const buttonStyle: ViewStyle = {
+  width: "50%"
+};
+
 const ButtonSection = () => {
+  const navigation = useNavigation();
+
+  const onCancel = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
   return (
     <ButtonSectionBackground>
-      <RegularButton btnStyles={{ width: "50%" }} onPress={() => {}}>
-        Cancel <Ionicons name="card" size={17} color={colors.white} />
+      <RegularButton btnStyles={buttonStyle} onPress={onCancel}>
+        <Ionicons name="card" size={17} color={colors.white} /> Cancel
       </RegularButton>
     </ButtonSectionBackground>
   );

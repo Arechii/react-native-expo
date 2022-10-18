@@ -1,10 +1,10 @@
-import { View } from "react-native";
-import styled from "styled-components/native";
+import { TextStyle, View } from "react-native";
 import { colors } from "../colors";
+import { TransactionProps } from "./types";
+import styled from "styled-components/native";
 import RegularText from "../Text/RegularText";
 import SmallText from "../Text/SmallText";
 import TransactionAvi from "./TransactionAvi";
-import { TransactionProps } from "./types";
 
 const TransactionRow = styled.View`
   flex-direction: row;
@@ -26,23 +26,24 @@ const RightView = styled.View`
   flex: 1;
 `;
 
+const leftTitleStyle: TextStyle = { color: colors.secondary, textAlign: "left", marginBottom: 5 };
+const leftValueStyle: TextStyle = { color: colors.graydark, textAlign: "left" };
+const rightTitleStyle: TextStyle = { ...leftTitleStyle, textAlign: "right" };
+const rightValueStyle: TextStyle = { ...leftValueStyle, textAlign: "right" };
+
 const TransactionItem = ({ title, subtitle, amount, date, art }: TransactionProps) => {
   return (
     <TransactionRow>
       <LeftView>
         <TransactionAvi background={art.background} icon={art.icon} />
         <View style={{ marginLeft: 10 }}>
-          <RegularText textStyles={{ color: colors.secondary, textAlign: "left", marginBottom: 5 }}>
-            {title}
-          </RegularText>
-          <SmallText textStyles={{ color: colors.graydark, textAlign: "left" }}>{subtitle}</SmallText>
+          <RegularText textStyles={leftTitleStyle}>{title}</RegularText>
+          <SmallText textStyles={leftValueStyle}>{subtitle}</SmallText>
         </View>
       </LeftView>
       <RightView>
-        <RegularText textStyles={{ color: colors.secondary, textAlign: "right", marginBottom: 5 }}>
-          {amount}
-        </RegularText>
-        <SmallText textStyles={{ color: colors.graydark, textAlign: "right" }}>{date}</SmallText>
+        <RegularText textStyles={rightTitleStyle}>-${amount}</RegularText>
+        <SmallText textStyles={rightValueStyle}>{date}</SmallText>
       </RightView>
     </TransactionRow>
   );

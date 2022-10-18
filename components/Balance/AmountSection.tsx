@@ -1,8 +1,9 @@
-import styled from "styled-components/native";
 import { colors } from "../colors";
+import { AmountProps } from "./types";
+import { TextStyle } from "react-native";
+import styled from "styled-components/native";
 import RegularText from "../Text/RegularText";
 import SmallText from "../Text/SmallText";
-import { AmountProps } from "./types";
 
 const AmountSectionBackground = styled.View`
   flex: 1;
@@ -11,11 +12,21 @@ const AmountSectionBackground = styled.View`
   align-items: center;
 `;
 
+const balanceTitleStyle: TextStyle = {
+  color: colors.secondary,
+  marginBottom: 15
+};
+
+const balanceStyle: TextStyle = {
+  color: colors.secondary,
+  fontSize: 28
+};
+
 const AmountSection = ({ balance }: AmountProps) => {
   return (
     <AmountSectionBackground>
-      <SmallText textStyles={{ color: colors.secondary, marginBottom: 15 }}>Total Balance</SmallText>
-      <RegularText textStyles={{ color: colors.secondary, fontSize: 28 }}>$ {balance}</RegularText>
+      <SmallText textStyles={balanceTitleStyle}>Total Balance</SmallText>
+      <RegularText textStyles={balanceStyle}>$ {balance}</RegularText>
     </AmountSectionBackground>
   );
 };

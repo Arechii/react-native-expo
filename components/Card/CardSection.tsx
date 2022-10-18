@@ -1,7 +1,7 @@
-import { FlatList, FlatListProps } from "react-native";
+import { FlatList, FlatListProps, ViewStyle } from "react-native";
+import { CardProps, CardSectionProps } from "./types";
 import styled from "styled-components/native";
 import CardItem from "./CardItem";
-import { CardProps, CardSectionProps } from "./types";
 
 const CardList = styled(FlatList as new (props: FlatListProps<CardProps>) => FlatList<CardProps>)`
   width: 100%;
@@ -10,14 +10,19 @@ const CardList = styled(FlatList as new (props: FlatListProps<CardProps>) => Fla
   padding-bottom: 15px;
 `;
 
+const containerStyle: ViewStyle = {
+  paddingRight: 25,
+  alignItems: "center"
+};
+
 const CardSection = ({ data }: CardSectionProps) => {
   return (
     <CardList
       data={data}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingRight: 25, alignItems: "center" }}
-      keyExtractor={({ id }: any) => id.toString()}
+      contentContainerStyle={containerStyle}
+      keyExtractor={({ id }: CardProps) => id.toString()}
       renderItem={({ item }: any) => <CardItem {...item} />}
     />
   );

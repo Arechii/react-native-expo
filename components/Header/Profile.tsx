@@ -24,7 +24,7 @@ interface ProfileProps {
 
 const Profile = ({ img, imgStyle, imgContainerStyle, onPress }: ProfileProps) => {
   return (
-    <StyledView onPress={onPress} style={imgContainerStyle}>
+    <StyledView style={imgContainerStyle} onPress={onPress}>
       <StyledImage style={imgStyle} source={img} />
     </StyledView>
   );
