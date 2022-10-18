@@ -6,10 +6,14 @@ import { colors } from "../components/colors";
 import Greeting from "../components/Header/Greeting";
 import Profile from "../components/Header/Profile";
 import Avi from "../assets/avi/avatar.png";
+import { CardProps } from "../components/Card/types";
+import Balance from "../screens/Balance";
+import { Ionicons } from "@expo/vector-icons";
 
 export type RootStackParamList = {
   Welcome: undefined;
   Home: undefined;
+  Balance: CardProps;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -36,7 +40,7 @@ const options: StackNavigationOptions = {
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={options} initialRouteName="Home">
+      <Stack.Navigator screenOptions={options} initialRouteName="Balance">
         <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
         <Stack.Screen
           name="Home"
@@ -45,6 +49,18 @@ const RootStack = () => {
             headerTitle: props => <Greeting mainText="Hey Coby!" subText="Welcome back" {...props} />,
             headerLeft: () => <></>
           }}
+        />
+        <Stack.Screen
+          name="Balance"
+          component={Balance}
+          options={({ route }) => ({
+            headerTitle: route?.params?.alias,
+            headerTitleAlign: "center",
+            headerBackImage: props => <Ionicons name="chevron-back" size={25} color={colors.secondary} {...props} />,
+            headerLeftContainerStyle: {
+              paddingLeft: 0
+            }
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
